@@ -12,7 +12,7 @@ Example pillar
 
 Configuration for syslog from Ubuntu 14.04 (trusty):
 
-.. literalinclude:: tests/pillar/service.sls
+.. literalinclude:: tests/pillar/server.sls
    :language: yaml
 
 Reference
