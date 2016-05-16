@@ -1,0 +1,6 @@
+applications:
+  - logrotate
+parameters:
+  logrotate:
+    server:
+      enabled: true

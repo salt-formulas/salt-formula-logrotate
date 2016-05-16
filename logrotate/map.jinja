@@ -1,0 +1,10 @@
+{%- load_yaml as server_defaults %}
+default:
+  pkgs:
+  - logrotate
+  config_dir: /etc/logrotate.d
+  config: /etc/logrotate.conf
+{%- endload %}
+
+{%- set server = salt['grains.filter_by'](server_defaults, merge=salt['pillar.get']('logrotate:server')) %}
+
