@@ -1,0 +1,8 @@
+name: logrotate
+os: 
+os_family: 
+version: 201606
+release: 1
+summary: logrotate Salt formula
+description: Install and configure logrotate server and relay.
+top_level_dir: logrotate
