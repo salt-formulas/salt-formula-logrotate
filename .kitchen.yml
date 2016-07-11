@@ -1,0 +1,41 @@
+# vim: ft=yaml
+---
+driver:
+  name: vagrant
+  customize:
+    memory: 512
+  vm_hostname: logrotate.ci.local
+
+provisioner:
+  name: salt_solo
+  # As of 2016/06 http://bootstrap.saltstack.org do not handle ubuntu 16.04. and fails in docker container
+  # salt_bootstrap_url: https://bootstrap.saltstack.org
+  salt_bootstrap_url: https://raw.githubusercontent.com/epcim/salt-bootstrap/add-apt-transport-https-ubuntu/bootstrap-salt.sh
+  salt_install: bootstrap
+  salt_version: latest
+  formula: logrotate
+  log_level: info
+  state_top:
+    base:
+      "*":
+        - logrotate
+  pillars:
+    top.sls:
+      base:
+        "*":
+          - logrotate
+    logrotate.sls:
+      server:
+        ssl:
+          enabled: false
+
+platforms:
+  - name: bento/ubuntu-14.04
+  - name: bento/ubuntu-16.04
+  - name: bento/centos-7
+
+suites:
+  - name: server
+    provisioner:
+      pillars-from-files:
+        logrotate.sls: tests/pillar/server.sls

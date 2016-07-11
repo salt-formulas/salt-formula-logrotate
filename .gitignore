@@ -1,3 +1,4 @@
 tests/build/
 *.swp
 *.pyc
+.kitchen

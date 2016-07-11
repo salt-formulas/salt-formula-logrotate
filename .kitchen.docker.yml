@@ -1,0 +1,16 @@
+---
+driver:
+  name: docker
+  hostname: logrotate.ci.local
+  use_sudo: false
+
+provisioner:
+  salt_bootstrap_url: https://raw.githubusercontent.com/epcim/salt-bootstrap/add-apt-transport-https-ubuntu/bootstrap-salt.sh
+  grains:
+    noservices: True
+
+platforms:
+  - name: ubuntu-14.04
+  - name: ubuntu-16.04
+  - name: centos-7
+
