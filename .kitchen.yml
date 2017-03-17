@@ -1,20 +1,19 @@
-# vim: ft=yaml
 ---
 driver:
-  name: vagrant
-  customize:
-    memory: 512
-  vm_hostname: logrotate.ci.local
+  name: docker
+  hostname: logrotate.ci.local
+  use_sudo: false
 
 provisioner:
   name: salt_solo
-  # As of 2016/06 http://bootstrap.saltstack.org do not handle ubuntu 16.04. and fails in docker container
-  # salt_bootstrap_url: https://bootstrap.saltstack.org
-  salt_bootstrap_url: https://raw.githubusercontent.com/epcim/salt-bootstrap/add-apt-transport-https-ubuntu/bootstrap-salt.sh
   salt_install: bootstrap
+  salt_bootstrap_url: https://bootstrap.saltstack.com
   salt_version: latest
+  require_chef: false
+  log_level: error
   formula: logrotate
-  log_level: info
+  grains:
+    noservices: True
   state_top:
     base:
       "*":
@@ -24,18 +23,22 @@ provisioner:
       base:
         "*":
           - logrotate
-    logrotate.sls:
-      server:
-        ssl:
-          enabled: false
+
+verifier:
+  name: inspec
+  sudo: true
 
 platforms:
-  - name: bento/ubuntu-14.04
-  - name: bento/ubuntu-16.04
-  - name: bento/centos-7
+  - name: <%=ENV['PLATFORM'] || 'ubuntu-xenial'%>
+    driver_config:
+      image: <%=ENV['PLATFORM'] || 'trevorj/salty-whales:xenial'%>
+      platform: ubuntu
+
 
 suites:
+
   - name: server
     provisioner:
       pillars-from-files:
         logrotate.sls: tests/pillar/server.sls
+# vim: ft=yaml sw=2 ts=2 sts=2 tw=125
