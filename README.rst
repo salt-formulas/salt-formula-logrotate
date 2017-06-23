@@ -52,6 +52,31 @@ Configuration for syslog from Ubuntu 14.04 (trusty):
               - compress
               - postrotate: "reload rsyslog >/dev/null 2>&1 || true"
 
+Cross-formula relationship
+==========================
+
+It's possible to use support meta to define logrotate rules from within other
+formula.
+
+Example ``meta/logrotate.yml`` for horizon formula:
+
+.. code-block:: yaml
+
+    job:
+      horizon:
+        - files:
+            - /var/log/horizon/*.log
+          options:
+            - compress
+            - delaycompress
+            - missingok
+            - notifempty
+            - rotate: 10
+            - daily
+            - minsize: 20M
+            - maxsize: 500M
+            - postrotate: "if /etc/init.d/apache2 status > /dev/null; then /etc/init.d/apache2 reload > /dev/null; fi"
+
 Reference
 =========
 
