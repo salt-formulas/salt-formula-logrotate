@@ -31,4 +31,12 @@ logrotate_job_{{ name }}:
 
 {%- endfor %}
 
+logrotate_conf:
+  file.managed:
+    - name: {{ server.config }}
+    - source: salt://logrotate/files/logrotate.conf
+    - template: jinja
+    - require:
+      - pkg: logrotate_packages
+
 {%- endif %}

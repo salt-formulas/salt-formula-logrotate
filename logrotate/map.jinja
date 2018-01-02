@@ -4,6 +4,23 @@ default:
   - logrotate
   config_dir: /etc/logrotate.d
   config: /etc/logrotate.conf
+  global_conf:
+    compress: false
+    rotate: weekly
+    keep_weeks: 4
+    dateext: false
+
+RedHat:
+  pkgs:
+  - logrotate
+  config_dir: /etc/logrotate.d
+  config: /etc/logrotate.conf
+  global_conf:
+    compress: true
+    rotate: weekly
+    keep_weeks: 4
+    dateext: true
+
 {%- endload %}
 
 {%- set server = salt['grains.filter_by'](server_defaults, merge=salt['pillar.get']('logrotate:server')) %}
