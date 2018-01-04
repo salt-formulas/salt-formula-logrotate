@@ -52,6 +52,19 @@ Configuration for syslog from Ubuntu 14.04 (trusty):
               - compress
               - postrotate: "reload rsyslog >/dev/null 2>&1 || true"
 
+Change parameters in main logrotate.conf file:
+
+.. code-block:: yaml
+
+    logrotate:
+      server:
+        enabled: true
+        global_conf:
+          compress: true
+          rotate: daily
+          keep_rotate: 6
+          dateext: true
+
 Cross-formula relationship
 ==========================
 
