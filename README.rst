@@ -62,7 +62,7 @@ Change parameters in main logrotate.conf file:
         global_conf:
           compress: true
           rotate: daily
-          keep_weeks: 6
+          keep_rotate: 6
           dateext: true
 
 Cross-formula relationship

@@ -7,7 +7,7 @@ default:
   global_conf:
     compress: false
     rotate: weekly
-    keep_weeks: 4
+    keep_rotate: 4
     dateext: false
 
 RedHat:
@@ -18,7 +18,7 @@ RedHat:
   global_conf:
     compress: true
     rotate: weekly
-    keep_weeks: 4
+    keep_rotate: 4
     dateext: true
 
 {%- endload %}
