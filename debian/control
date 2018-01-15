@@ -10,6 +10,6 @@ Vcs-Git: https://github.com/tcpcloud/salt-formula-logrotate.git
 
 Package: salt-formula-logrotate
 Architecture: all
-Depends: ${misc:Depends}, salt-master, reclass
+Depends: ${misc:Depends}
 Description: logrotate Salt formula
  Install and configure logrotate server and relay.
