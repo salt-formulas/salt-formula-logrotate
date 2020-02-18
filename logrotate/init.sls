@@ -1,4 +1,4 @@
+{%- if salt['pillar.get']('logrotate:server') %}
 include:
-{%- if pillar.logrotate.server is defined %}
 - logrotate.server
 {%- endif %}
