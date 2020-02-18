@@ -17,7 +17,7 @@ logrotate_packages:
   {%- endif %}
 {%- endfor %}
 
-{%- for name, job in _jobs.iteritems() %}
+{%- for name, job in _jobs.items() %}
 
 logrotate_job_{{ name }}:
   file.managed:
